@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -46,15 +47,26 @@ public class CrimeListFragment extends Fragment {
     private class CrimeHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
         private TextView mTitleTextView;
         private TextView mDateTextView;
+        private Button mCallPoliceButton;
         private Crime mCrime;
 
-        public CrimeHolder(LayoutInflater inflater, ViewGroup parent) {
-            super(inflater.inflate(R.layout.list_item_crime, parent, false));
+        public CrimeHolder(View v, int viewType) {
+            super(v);
 
             itemView.setOnClickListener(this);
 
             mTitleTextView = (TextView) itemView.findViewById(R.id.crime_title);
             mDateTextView = (TextView) itemView.findViewById(R.id.crime_date);
+
+            if (viewType == Crime.SERIOUS_CRIME) {
+                mCallPoliceButton = (Button) itemView.findViewById(R.id.call_police_button);
+                mCallPoliceButton.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        Toast.makeText(getActivity(), String.format("%s (CALL THE POLICE)", mCrime.getTitle()), Toast.LENGTH_SHORT).show();
+                    }
+                });
+            }
         }
 
         public void bind(Crime crime) {
@@ -82,7 +94,14 @@ public class CrimeListFragment extends Fragment {
         public CrimeHolder onCreateViewHolder(@NonNull @NotNull ViewGroup parent, int viewType) {
             LayoutInflater layoutInflater = LayoutInflater.from(getActivity());
 
-            return new CrimeHolder(layoutInflater, parent);
+            View view;
+            if (viewType == Crime.SERIOUS_CRIME) {
+                view = layoutInflater.inflate(R.layout.list_item_serious_crime, parent, false);
+            } else {
+                view = layoutInflater.inflate(R.layout.list_item_crime, parent, false);
+            }
+
+            return new CrimeHolder(view, viewType);
         }
 
         @Override
@@ -106,7 +125,7 @@ public class CrimeListFragment extends Fragment {
         public int getItemViewType(int position) {
             Crime crime = mCrimes.get(position);
 
-            return crime.isRequiresPolice() ? 1 : 0;
+            return crime.getCrimeType();
         }
     }
 }

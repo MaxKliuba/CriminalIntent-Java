@@ -8,8 +8,10 @@ public class Crime {
     private String mTitle;
     private Date mDate;
     private boolean mSolved;
-    private boolean mRequiresPolice;
+    private int mCrimeType;
 
+    public static final int ORDINARY_CRIME = 0;
+    public static final int SERIOUS_CRIME = 1;
     public Crime() {
         mId = UUID.randomUUID();
         mDate = new Date();
@@ -43,11 +45,11 @@ public class Crime {
         mSolved = solved;
     }
 
-    public boolean isRequiresPolice() {
-        return mRequiresPolice;
+    public int getCrimeType() {
+        return mCrimeType;
     }
 
-    public void setRequiresPolice(boolean requiresPolice) {
-        mRequiresPolice = requiresPolice;
+    public void setCrimeType(int crimeType) {
+        mCrimeType = crimeType;
     }
 }
