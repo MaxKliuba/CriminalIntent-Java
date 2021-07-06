@@ -4,14 +4,15 @@ import java.util.Date;
 import java.util.UUID;
 
 public class Crime {
+    public static final int ORDINARY_CRIME = 0;
+    public static final int SERIOUS_CRIME = 1;
+
     private UUID mId;
     private String mTitle;
     private Date mDate;
     private boolean mSolved;
     private int mCrimeType;
 
-    public static final int ORDINARY_CRIME = 0;
-    public static final int SERIOUS_CRIME = 1;
     public Crime() {
         mId = UUID.randomUUID();
         mDate = new Date();

@@ -8,6 +8,7 @@ import java.util.UUID;
 
 public class CrimeLab {
     private static CrimeLab sCrimeLab;
+
     private List<Crime> mCrimes;
 
     public static CrimeLab get(Context context) {
@@ -21,7 +22,7 @@ public class CrimeLab {
         mCrimes = new ArrayList<>();
 
         // test objects
-        for(int i = 0; i < 100; i++) {
+        for (int i = 0; i < 100; i++) {
             Crime crime = new Crime();
             crime.setTitle("Crime №" + i);
             crime.setCrimeType(i % 2 == 0 ? Crime.ORDINARY_CRIME : Crime.SERIOUS_CRIME);

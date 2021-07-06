@@ -1,10 +1,6 @@
 package com.max_kliuba.criminalintent;
 
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
-
-import android.os.Bundle;
 
 public class CrimeActivity extends SingleFragmentActivity {
 
