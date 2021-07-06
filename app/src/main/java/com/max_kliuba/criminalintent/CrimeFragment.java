@@ -19,10 +19,10 @@ import com.google.android.material.textfield.TextInputEditText;
 import org.jetbrains.annotations.NotNull;
 
 public class CrimeFragment extends Fragment {
+
     private TextInputEditText mTitleField;
     private Button mDateButton;
     private CheckBox mSolvedCheckBox;
-
     private Crime mCrime;
 
     @Override
