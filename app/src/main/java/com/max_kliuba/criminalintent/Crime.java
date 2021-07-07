@@ -1,6 +1,8 @@
 package com.max_kliuba.criminalintent;
 
+import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.Locale;
 import java.util.UUID;
 
 public class Crime {
@@ -32,6 +34,12 @@ public class Crime {
 
     public Date getDate() {
         return mDate;
+    }
+
+    public String getFormattedDate() {
+        SimpleDateFormat simpleDateFormat =
+                new SimpleDateFormat("HH:mm, EEEE, MMM dd, yyyy", Locale.US);
+        return simpleDateFormat.format(mDate);
     }
 
     public void setDate(Date date) {

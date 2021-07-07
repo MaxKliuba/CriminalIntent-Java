@@ -5,6 +5,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -47,6 +48,7 @@ public class CrimeListFragment extends Fragment {
     private class CrimeHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
         private TextView mTitleTextView;
         private TextView mDateTextView;
+        private ImageView mSolvedImageView;
         private Button mCallPoliceButton;
         private Crime mCrime;
 
@@ -57,6 +59,7 @@ public class CrimeListFragment extends Fragment {
 
             mTitleTextView = (TextView) itemView.findViewById(R.id.crime_title);
             mDateTextView = (TextView) itemView.findViewById(R.id.crime_date);
+            mSolvedImageView = (ImageView) itemView.findViewById(R.id.crime_solved_img);
 
             if (viewType == Crime.SERIOUS_CRIME) {
                 mCallPoliceButton = (Button) itemView.findViewById(R.id.call_police_button);
@@ -72,7 +75,8 @@ public class CrimeListFragment extends Fragment {
         public void bind(Crime crime) {
             mCrime = crime;
             mTitleTextView.setText(mCrime.getTitle());
-            mDateTextView.setText(mCrime.getDate().toString());
+            mDateTextView.setText(mCrime.getFormattedDate());
+            mSolvedImageView.setVisibility(mCrime.isSolved() ? View.VISIBLE : View.GONE);
         }
 
         @Override
