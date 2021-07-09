@@ -55,12 +55,13 @@ public class CrimeListFragment extends Fragment {
             mAdapter = new CrimeAdapter(crimes);
             mCrimeRecyclerView.setAdapter(mAdapter);
         } else {
-            if (mClickedItemPosition >= 0) {
+            mAdapter.notifyDataSetChanged();
+            /* if (mClickedItemPosition >= 0) {
                 mAdapter.notifyItemChanged(mClickedItemPosition);
                 mClickedItemPosition = -1;
             } else {
                 mAdapter.notifyDataSetChanged();
-            }
+            } */
         }
 
     }
@@ -105,7 +106,7 @@ public class CrimeListFragment extends Fragment {
         @Override
         public void onClick(View v) {
             mClickedItemPosition = getBindingAdapterPosition();
-            Intent intent = CrimeActivity.newIntent(getActivity(), mCrime.getId());
+            Intent intent = CrimePagerActivity.newIntent(getActivity(), mCrime.getId());
             startActivity(intent);
         }
     }
