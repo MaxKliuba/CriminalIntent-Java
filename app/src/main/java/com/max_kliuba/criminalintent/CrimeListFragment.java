@@ -24,10 +24,12 @@ public class CrimeListFragment extends Fragment {
 
     private RecyclerView mCrimeRecyclerView;
     private CrimeAdapter mAdapter;
+    private int mClickedItemPosition = -1;
 
     @Nullable
     @org.jetbrains.annotations.Nullable
     @Override
+
     public View onCreateView(@NonNull @NotNull LayoutInflater inflater,
                              @Nullable @org.jetbrains.annotations.Nullable ViewGroup container,
                              @Nullable @org.jetbrains.annotations.Nullable Bundle savedInstanceState) {
@@ -53,7 +55,12 @@ public class CrimeListFragment extends Fragment {
             mAdapter = new CrimeAdapter(crimes);
             mCrimeRecyclerView.setAdapter(mAdapter);
         } else {
-            mAdapter.notifyDataSetChanged();
+            if (mClickedItemPosition >= 0) {
+                mAdapter.notifyItemChanged(mClickedItemPosition);
+                mClickedItemPosition = -1;
+            } else {
+                mAdapter.notifyDataSetChanged();
+            }
         }
 
     }
@@ -90,10 +97,14 @@ public class CrimeListFragment extends Fragment {
             mTitleTextView.setText(mCrime.getTitle());
             mDateTextView.setText(mCrime.getFormattedDate());
             mSolvedImageView.setVisibility(mCrime.isSolved() ? View.VISIBLE : View.GONE);
+            if (mCrime.getCrimeType() == Crime.SERIOUS_CRIME) {
+                mCallPoliceButton.setEnabled(!mCrime.isSolved());
+            }
         }
 
         @Override
         public void onClick(View v) {
+            mClickedItemPosition = getBindingAdapterPosition();
             Intent intent = CrimeActivity.newIntent(getActivity(), mCrime.getId());
             startActivity(intent);
         }
@@ -112,31 +123,29 @@ public class CrimeListFragment extends Fragment {
         public CrimeHolder onCreateViewHolder(@NonNull @NotNull ViewGroup parent, int viewType) {
             LayoutInflater layoutInflater = LayoutInflater.from(getActivity());
 
-            View view;
-            if (viewType == Crime.SERIOUS_CRIME) {
-                view = layoutInflater.inflate(R.layout.list_item_serious_crime, parent, false);
-            } else {
-                view = layoutInflater.inflate(R.layout.list_item_crime, parent, false);
+            int resLayoutId = R.layout.list_item_crime;
+            switch (viewType) {
+                case Crime.ORDINARY_CRIME:
+                    resLayoutId = R.layout.list_item_crime;
+                    break;
+                case Crime.SERIOUS_CRIME:
+                    resLayoutId = R.layout.list_item_serious_crime;
+                    break;
             }
+            View view = layoutInflater.inflate(resLayoutId, parent, false);
 
             return new CrimeHolder(view, viewType);
         }
 
         @Override
         public void onBindViewHolder(@NonNull @NotNull CrimeListFragment.CrimeHolder holder, int position) {
-
+            Crime crime = mCrimes.get(position);
+            holder.bind(crime);
         }
 
         @Override
         public int getItemCount() {
             return mCrimes.size();
-        }
-
-        @Override
-        public void onBindViewHolder(@NonNull @NotNull CrimeListFragment.CrimeHolder holder,
-                                     int position, @NonNull @NotNull List<Object> payloads) {
-            Crime crime = mCrimes.get(position);
-            holder.bind(crime);
         }
 
         @Override
