@@ -13,6 +13,7 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -24,7 +25,6 @@ public class CrimeListFragment extends Fragment {
 
     private RecyclerView mCrimeRecyclerView;
     private CrimeAdapter mAdapter;
-    private int mClickedItemPosition = -1;
 
     @Nullable
     @org.jetbrains.annotations.Nullable
@@ -36,6 +36,7 @@ public class CrimeListFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_crime_list, container, false);
         mCrimeRecyclerView = (RecyclerView) view.findViewById(R.id.crime_recycler_view);
         mCrimeRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
+        mCrimeRecyclerView.addItemDecoration(new DividerItemDecoration(getActivity(), LinearLayoutManager.VERTICAL));
         updateUserInterface();
 
         return view;
@@ -56,12 +57,6 @@ public class CrimeListFragment extends Fragment {
             mCrimeRecyclerView.setAdapter(mAdapter);
         } else {
             mAdapter.notifyDataSetChanged();
-            /* if (mClickedItemPosition >= 0) {
-                mAdapter.notifyItemChanged(mClickedItemPosition);
-                mClickedItemPosition = -1;
-            } else {
-                mAdapter.notifyDataSetChanged();
-            } */
         }
 
     }
@@ -70,7 +65,6 @@ public class CrimeListFragment extends Fragment {
         private TextView mTitleTextView;
         private TextView mDateTextView;
         private ImageView mSolvedImageView;
-        private Button mCallPoliceButton;
         private Crime mCrime;
 
         public CrimeHolder(View v, int viewType) {
@@ -81,16 +75,6 @@ public class CrimeListFragment extends Fragment {
             mTitleTextView = (TextView) itemView.findViewById(R.id.crime_title);
             mDateTextView = (TextView) itemView.findViewById(R.id.crime_date);
             mSolvedImageView = (ImageView) itemView.findViewById(R.id.crime_solved_img);
-
-            if (viewType == Crime.SERIOUS_CRIME) {
-                mCallPoliceButton = (Button) itemView.findViewById(R.id.call_police_button);
-                mCallPoliceButton.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        Toast.makeText(getActivity(), String.format("%s (CALL THE POLICE)", mCrime.getTitle()), Toast.LENGTH_SHORT).show();
-                    }
-                });
-            }
         }
 
         public void bind(Crime crime) {
@@ -98,14 +82,10 @@ public class CrimeListFragment extends Fragment {
             mTitleTextView.setText(mCrime.getTitle());
             mDateTextView.setText(mCrime.getFormattedDate());
             mSolvedImageView.setVisibility(mCrime.isSolved() ? View.VISIBLE : View.GONE);
-            if (mCrime.getCrimeType() == Crime.SERIOUS_CRIME) {
-                mCallPoliceButton.setEnabled(!mCrime.isSolved());
-            }
         }
 
         @Override
         public void onClick(View v) {
-            mClickedItemPosition = getBindingAdapterPosition();
             Intent intent = CrimePagerActivity.newIntent(getActivity(), mCrime.getId());
             startActivity(intent);
         }
@@ -123,16 +103,7 @@ public class CrimeListFragment extends Fragment {
         @Override
         public CrimeHolder onCreateViewHolder(@NonNull @NotNull ViewGroup parent, int viewType) {
             LayoutInflater layoutInflater = LayoutInflater.from(getActivity());
-
             int resLayoutId = R.layout.list_item_crime;
-            switch (viewType) {
-                case Crime.ORDINARY_CRIME:
-                    resLayoutId = R.layout.list_item_crime;
-                    break;
-                case Crime.SERIOUS_CRIME:
-                    resLayoutId = R.layout.list_item_serious_crime;
-                    break;
-            }
             View view = layoutInflater.inflate(resLayoutId, parent, false);
 
             return new CrimeHolder(view, viewType);

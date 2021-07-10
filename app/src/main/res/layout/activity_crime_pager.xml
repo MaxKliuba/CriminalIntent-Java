@@ -28,22 +28,22 @@
             android:layout_width="50dp"
             android:layout_height="50dp"
             android:layout_gravity="left"
-            app:icon="@android:drawable/ic_media_previous"
+            android:layout_marginHorizontal="16dp"
+            android:layout_marginBottom="16dp"
+            app:icon="@drawable/ic_first_page_36"
             app:iconGravity="textStart"
-            app:iconPadding="0dp"
-            android:layout_marginLeft="16dp"
-            android:layout_marginBottom="16dp" />
+            app:iconPadding="0dp" />
 
         <Button
             android:id="@+id/go_to_end_btn"
             android:layout_width="50dp"
             android:layout_height="50dp"
             android:layout_gravity="right"
-            app:icon="@android:drawable/ic_media_next"
+            android:layout_marginHorizontal="16dp"
+            android:layout_marginBottom="16dp"
+            app:icon="@drawable/ic_last_page_36"
             app:iconGravity="textEnd"
-            app:iconPadding="0dp"
-            android:layout_marginRight="16dp"
-            android:layout_marginBottom="16dp" />
+            app:iconPadding="0dp" />
 
     </FrameLayout>
 
