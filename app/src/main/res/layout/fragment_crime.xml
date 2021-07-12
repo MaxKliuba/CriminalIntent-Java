@@ -43,6 +43,8 @@
                 android:id="@+id/crime_date"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                app:icon="@drawable/ic_date_24"
+                app:iconGravity="end"
                 tools:text="[DATE]" />
 
             <CheckBox

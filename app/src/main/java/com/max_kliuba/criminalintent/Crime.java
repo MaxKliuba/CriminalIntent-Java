@@ -38,7 +38,7 @@ public class Crime {
 
     public String getFormattedDate() {
         SimpleDateFormat simpleDateFormat =
-                new SimpleDateFormat("HH:mm, EEEE, MMM dd, yyyy", Locale.US);
+                new SimpleDateFormat("EEEE, MMM dd, yyyy", Locale.US);
         return simpleDateFormat.format(mDate);
     }
 
