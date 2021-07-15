@@ -29,6 +29,13 @@ public class CrimePagerActivity extends AppCompatActivity {
     private Button mGoToStartImageButton;
     private Button mGoToEndImageButton;
 
+    public static Intent newIntent(Context packageContext, UUID crimeId) {
+        Intent intent = new Intent(packageContext, CrimePagerActivity.class);
+        intent.putExtra(EXTRA_CRIME_ID, crimeId);
+
+        return intent;
+    }
+
     @Override
     protected void onCreate(@Nullable @org.jetbrains.annotations.Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -98,12 +105,5 @@ public class CrimePagerActivity extends AppCompatActivity {
 
             }
         });
-    }
-
-    public static Intent newIntent(Context packageContext, UUID crimeId) {
-        Intent intent = new Intent(packageContext, CrimePagerActivity.class);
-        intent.putExtra(EXTRA_CRIME_ID, crimeId);
-
-        return intent;
     }
 }
