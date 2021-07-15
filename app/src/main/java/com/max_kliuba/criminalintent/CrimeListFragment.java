@@ -29,7 +29,6 @@ public class CrimeListFragment extends Fragment {
     @Nullable
     @org.jetbrains.annotations.Nullable
     @Override
-
     public View onCreateView(@NonNull @NotNull LayoutInflater inflater,
                              @Nullable @org.jetbrains.annotations.Nullable ViewGroup container,
                              @Nullable @org.jetbrains.annotations.Nullable Bundle savedInstanceState) {
@@ -80,7 +79,7 @@ public class CrimeListFragment extends Fragment {
         public void bind(Crime crime) {
             mCrime = crime;
             mTitleTextView.setText(mCrime.getTitle());
-            mDateTextView.setText(mCrime.getFormattedDate());
+            mDateTextView.setText(mCrime.getFormattedDateTime());
             mSolvedImageView.setVisibility(mCrime.isSolved() ? View.VISIBLE : View.GONE);
         }
 

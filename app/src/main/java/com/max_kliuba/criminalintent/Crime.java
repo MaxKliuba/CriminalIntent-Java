@@ -36,9 +36,21 @@ public class Crime {
         return mDate;
     }
 
+    public String getFormattedTime() {
+        SimpleDateFormat simpleDateFormat =
+                new SimpleDateFormat("HH:mm", Locale.US);
+        return simpleDateFormat.format(mDate);
+    }
+
     public String getFormattedDate() {
         SimpleDateFormat simpleDateFormat =
                 new SimpleDateFormat("EEEE, MMM dd, yyyy", Locale.US);
+        return simpleDateFormat.format(mDate);
+    }
+
+    public String getFormattedDateTime() {
+        SimpleDateFormat simpleDateFormat =
+                new SimpleDateFormat("HH:mm, EEEE, MMM dd, yyyy", Locale.US);
         return simpleDateFormat.format(mDate);
     }
 
