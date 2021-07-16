@@ -28,6 +28,10 @@ public class CrimeLab {
         mCrimes.put(crime.getId(), crime);
     }
 
+    public void deleteCrime(UUID id) {
+        mCrimes.remove(id);
+    }
+
     public List<Crime> getCrimes() {
         return new ArrayList<>(mCrimes.values());
     }
