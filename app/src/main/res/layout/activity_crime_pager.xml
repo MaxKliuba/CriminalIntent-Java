@@ -25,23 +25,23 @@
 
         <Button
             android:id="@+id/go_to_start_btn"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
+            android:layout_width="40dp"
+            android:layout_height="wrap_content"
             android:layout_gravity="left"
             android:layout_marginHorizontal="16dp"
             android:layout_marginBottom="16dp"
-            app:icon="@drawable/ic_first_page_36"
+            app:icon="@drawable/ic_first_page_24"
             app:iconGravity="textStart"
             app:iconPadding="0dp" />
 
         <Button
             android:id="@+id/go_to_end_btn"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
+            android:layout_width="40dp"
+            android:layout_height="wrap_content"
             android:layout_gravity="right"
             android:layout_marginHorizontal="16dp"
             android:layout_marginBottom="16dp"
-            app:icon="@drawable/ic_last_page_36"
+            app:icon="@drawable/ic_last_page_24"
             app:iconGravity="textEnd"
             app:iconPadding="0dp" />
 
