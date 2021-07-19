@@ -42,6 +42,7 @@
                 android:text="@string/crime_details_label" />
 
             <Button
+                style="?attr/materialButtonOutlinedStyle"
                 android:id="@+id/crime_time"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -50,6 +51,7 @@
                 tools:text="[TIME]" />
 
             <Button
+                style="?attr/materialButtonOutlinedStyle"
                 android:id="@+id/crime_date"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -63,7 +65,14 @@
                 android:layout_height="wrap_content"
                 android:text="@string/crime_solved_label"/>
 
+            <TextView
+                style="?android:listSeparatorTextViewStyle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/crime_suspect_label" />
+
             <Button
+                style="?attr/materialButtonOutlinedStyle"
                 android:id="@+id/crime_suspect"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -75,6 +84,7 @@
                 android:id="@+id/crime_report"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
                 android:text="@string/crime_report_text"
                 app:icon="@drawable/ic_send_24"
                 app:iconGravity="end" />
