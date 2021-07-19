@@ -31,7 +31,8 @@
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/crime_title"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content" />
+                    android:layout_height="wrap_content"
+                    android:inputType="textMultiLine|textCapSentences" />
             </com.google.android.material.textfield.TextInputLayout>
 
             <TextView
@@ -61,6 +62,22 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="@string/crime_solved_label"/>
+
+            <Button
+                android:id="@+id/crime_suspect"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/crime_suspect_text"
+                app:icon="@drawable/ic_person_add_24"
+                app:iconGravity="end" />
+
+            <Button
+                android:id="@+id/crime_report"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/crime_report_text"
+                app:icon="@drawable/ic_send_24"
+                app:iconGravity="end" />
 
         </LinearLayout>
 

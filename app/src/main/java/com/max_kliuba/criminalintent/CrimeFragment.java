@@ -1,8 +1,13 @@
 package com.max_kliuba.criminalintent;
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.database.Cursor;
+import android.net.Uri;
 import android.os.Bundle;
+import android.provider.ContactsContract;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.LayoutInflater;
@@ -36,13 +41,16 @@ public class CrimeFragment extends Fragment {
     private static final String DIALOG_TIME = "DialogTime";
     private static final int REQUEST_DATE = 0;
     private static final int REQUEST_TIME = 1;
+    private static final int REQUEST_CONTACT = 2;
 
+    private Crime mCrime;
     private LinearLayout mInputlinearLayout;
     private TextInputEditText mTitleField;
     private Button mTimeButton;
     private Button mDateButton;
     private CheckBox mSolvedCheckBox;
-    private Crime mCrime;
+    private Button mSuspectButton;
+    private Button mReportButton;
 
     public static CrimeFragment newInstance(UUID crimeId) {
         Bundle args = new Bundle();
@@ -136,6 +144,39 @@ public class CrimeFragment extends Fragment {
             }
         });
 
+        final Intent pickContact = new Intent(Intent.ACTION_PICK,
+                ContactsContract.Contacts.CONTENT_URI);
+
+        mSuspectButton = (Button) v.findViewById(R.id.crime_suspect);
+        mSuspectButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivityForResult(pickContact, REQUEST_CONTACT);
+            }
+        });
+        if (mCrime.getSuspect() != null) {
+            mSuspectButton.setText(mCrime.getSuspect());
+        }
+
+        PackageManager packageManager = getActivity().getPackageManager();
+        if (packageManager.resolveActivity(pickContact, PackageManager.MATCH_DEFAULT_ONLY) == null) {
+            mSuspectButton.setEnabled(false);
+        }
+
+        mReportButton = (Button) v.findViewById(R.id.crime_report);
+        mReportButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(Intent.ACTION_SEND);
+                intent.setType("text/plain");
+                intent.putExtra(Intent.EXTRA_TEXT, getCrimeReport());
+                intent.putExtra(Intent.EXTRA_SUBJECT, getString(R.string.crime_report_subject));
+                intent = Intent.createChooser(intent, getString(R.string.send_report));
+
+                startActivity(intent);
+            }
+        });
+
         return v;
     }
 
@@ -179,6 +220,26 @@ public class CrimeFragment extends Fragment {
                 mCrime.setDate(date);
                 updateDate();
                 break;
+            case REQUEST_CONTACT:
+                if (data != null) {
+                    Uri contactUri = data.getData();
+                    String[] queryFields = new String[]{
+                            ContactsContract.Contacts.DISPLAY_NAME
+                    };
+
+                    try (Cursor cursor = getActivity().getContentResolver()
+                            .query(contactUri, queryFields, null, null, null)) {
+                        if (cursor.getCount() == 0) {
+                            return;
+                        }
+
+                        cursor.moveToFirst();
+                        String suspect = cursor.getString(0);
+                        mCrime.setSuspect(suspect);
+                        mSuspectButton.setText(suspect);
+                    }
+                }
+                break;
         }
     }
 
@@ -189,5 +250,18 @@ public class CrimeFragment extends Fragment {
 
     private void updateDate() {
         mDateButton.setText(mCrime.getFormattedDate());
+    }
+
+    private String getCrimeReport() {
+        String solvedString = mCrime.isSolved() ? getString(R.string.crime_report_solved)
+                : getString(R.string.crime_report_unsolved);
+        String dateString = mCrime.getFormattedDateTime();
+        String suspect = mCrime.getSuspect();
+        suspect = (suspect == null) ? getString(R.string.crime_report_no_suspect)
+                : getString(R.string.crime_report_suspect, suspect);
+
+        String report = getString(R.string.crime_report, mCrime.getTitle(), dateString, solvedString, suspect);
+
+        return report;
     }
 }
