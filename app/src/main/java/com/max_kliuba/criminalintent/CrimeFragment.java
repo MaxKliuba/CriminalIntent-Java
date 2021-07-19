@@ -63,6 +63,13 @@ public class CrimeFragment extends Fragment {
         setHasOptionsMenu(true);
     }
 
+    @Override
+    public void onPause() {
+        super.onPause();
+
+        CrimeLab.get(getActivity()).updateCrime(mCrime);
+    }
+
     @Nullable
     @org.jetbrains.annotations.Nullable
     @Override
@@ -145,7 +152,7 @@ public class CrimeFragment extends Fragment {
                 getActivity().finish();
                 return true;
             case R.id.delete_crime:
-                CrimeLab.get(getActivity()).deleteCrime(mCrime.getId());
+                CrimeLab.get(getActivity()).deleteCrime(mCrime);
                 getActivity().finish();
                 return true;
             default:
