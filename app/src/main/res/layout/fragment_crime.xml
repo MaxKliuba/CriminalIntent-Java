@@ -13,12 +13,16 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            android:focusable="false"
+            android:focusableInTouchMode="true">
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal">
+                android:orientation="horizontal"
+                android:focusable="false"
+                android:focusableInTouchMode="true">
 
                 <androidx.cardview.widget.CardView
                     android:layout_width="93dp"
@@ -43,7 +47,9 @@
                     android:id="@+id/input_linear_layout"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="vertical" >
+                    android:orientation="vertical"
+                    android:focusable="false"
+                    android:focusableInTouchMode="true">
 
                     <TextView
                         style="?android:listSeparatorTextViewStyle"
@@ -80,6 +86,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 app:icon="@drawable/ic_time_24"
+                app:iconPadding="8dp"
                 app:iconGravity="end"
                 tools:text="[TIME]" />
 
@@ -89,6 +96,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 app:icon="@drawable/ic_date_24"
+                app:iconPadding="8dp"
                 app:iconGravity="end"
                 tools:text="[DATE]" />
 
@@ -120,6 +128,7 @@
                 android:layout_marginTop="16dp"
                 android:text="@string/crime_report_text"
                 app:icon="@drawable/ic_send_24"
+                app:iconPadding="8dp"
                 app:iconGravity="end" />
 
         </LinearLayout>

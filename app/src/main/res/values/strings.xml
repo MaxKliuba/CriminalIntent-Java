@@ -27,4 +27,8 @@
     <string name="crime_report_suspect">the suspect is %s.</string>
     <string name="crime_report_subject">CriminalIntent Crime Report</string>
     <string name="send_report">Send crime report via</string>
+    <string name="suspect_deleted_message">There is no suspect</string>
+    <string name="new_photo_text">New Photo</string>
+    <string name="delete_photo_text">Delete Photo</string>
+    <string name="photo_deleted_message">Photo deleted</string>
 </resources>

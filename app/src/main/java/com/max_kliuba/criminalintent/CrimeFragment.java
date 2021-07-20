@@ -24,6 +24,7 @@ import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -45,6 +46,7 @@ public class CrimeFragment extends Fragment {
     private static final String ARG_CRIME_ID = "crime_id";
     private static final String DIALOG_DATE = "DialogDate";
     private static final String DIALOG_TIME = "DialogTime";
+    private static final String DIALOG_PHOTO = "DialogPhoto";
     private static final String PROVIDER_AUTHORITY = "com.max_kliuba.criminalintent.fileprovider";
     private static final int REQUEST_DATE = 0;
     private static final int REQUEST_TIME = 1;
@@ -53,7 +55,6 @@ public class CrimeFragment extends Fragment {
 
     private Crime mCrime;
     private File mPhotoFile;
-    private LinearLayout mInputlinearLayout;
     private TextInputEditText mTitleField;
     private Button mTimeButton;
     private Button mDateButton;
@@ -116,12 +117,6 @@ public class CrimeFragment extends Fragment {
             }
         });
 
-        mInputlinearLayout = (LinearLayout) v.findViewById(R.id.input_linear_layout);
-        if (mCrime.getTitle() != null) {
-            mInputlinearLayout.setFocusable(false);
-            mInputlinearLayout.setFocusableInTouchMode(true);
-        }
-
         mTimeButton = (Button) v.findViewById(R.id.crime_time);
         updateTime();
         mTimeButton.setOnClickListener(new View.OnClickListener() {
@@ -165,8 +160,24 @@ public class CrimeFragment extends Fragment {
                 startActivityForResult(pickContact, REQUEST_CONTACT);
             }
         });
+        mSuspectButton.setOnLongClickListener(new View.OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View v) {
+                if (mCrime.getSuspect() != null) {
+                    mCrime.setSuspect(null);
+                    mSuspectButton.setText(R.string.crime_suspect_text);
+                    Toast.makeText(getActivity(), R.string.suspect_deleted_message, Toast.LENGTH_SHORT).show();
+
+                    return true;
+                }
+
+                return false;
+            }
+        });
         if (mCrime.getSuspect() != null) {
             mSuspectButton.setText(mCrime.getSuspect());
+        } else {
+            mSuspectButton.setText(R.string.crime_suspect_text);
         }
 
         PackageManager packageManager = getActivity().getPackageManager();
@@ -196,18 +207,38 @@ public class CrimeFragment extends Fragment {
         mPhotoView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Uri uri = FileProvider.getUriForFile(getActivity(), PROVIDER_AUTHORITY, mPhotoFile);
-                captureImage.putExtra(MediaStore.EXTRA_OUTPUT, uri);
-                List<ResolveInfo> cameraActivities = getActivity()
-                        .getPackageManager()
-                        .queryIntentActivities(captureImage, PackageManager.MATCH_DEFAULT_ONLY);
+                if (mPhotoFile == null || !mPhotoFile.exists()) {
+                    Uri uri = FileProvider.getUriForFile(getActivity(), PROVIDER_AUTHORITY, mPhotoFile);
+                    captureImage.putExtra(MediaStore.EXTRA_OUTPUT, uri);
+                    List<ResolveInfo> cameraActivities = getActivity()
+                            .getPackageManager()
+                            .queryIntentActivities(captureImage, PackageManager.MATCH_DEFAULT_ONLY);
 
-                for (ResolveInfo activity : cameraActivities) {
-                    getActivity().grantUriPermission(activity.activityInfo.packageName, uri,
-                            Intent.FLAG_GRANT_WRITE_URI_PERMISSION);
+                    for (ResolveInfo activity : cameraActivities) {
+                        getActivity().grantUriPermission(activity.activityInfo.packageName, uri,
+                                Intent.FLAG_GRANT_WRITE_URI_PERMISSION);
+                    }
+
+                    startActivityForResult(captureImage, REQUEST_PHOTO);
+                } else {
+                    FragmentManager manager = getFragmentManager();
+                    PhotoDialogFragment dialog = PhotoDialogFragment.newInstance(mPhotoFile.getPath());
+                    dialog.show(manager, DIALOG_PHOTO);
                 }
 
-                startActivityForResult(captureImage, REQUEST_PHOTO);
+            }
+        });
+        mPhotoView.setOnLongClickListener(new View.OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View v) {
+                if (CrimeLab.get(getActivity()).deletePhotoFile(mCrime)) {
+                    updatePhotoView();
+                    Toast.makeText(getActivity(), R.string.photo_deleted_message, Toast.LENGTH_SHORT).show();
+
+                    return true;
+                }
+
+                return false;
             }
         });
 
@@ -306,9 +337,7 @@ public class CrimeFragment extends Fragment {
         suspect = (suspect == null) ? getString(R.string.crime_report_no_suspect)
                 : getString(R.string.crime_report_suspect, suspect);
 
-        String report = getString(R.string.crime_report, mCrime.getTitle(), dateString, solvedString, suspect);
-
-        return report;
+        return getString(R.string.crime_report, mCrime.getTitle(), dateString, solvedString, suspect);
     }
 
     private void setEnabledPhotoView(boolean enabled) {

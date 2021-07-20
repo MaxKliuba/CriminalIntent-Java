@@ -92,6 +92,10 @@ public class CrimeLab {
         return new File(filesDir, crime.getPhotoFilename());
     }
 
+    public boolean deletePhotoFile(Crime crime) {
+        return getPhotoFile(crime).delete();
+    }
+
     private CrimeCursorWrapper queryCrimes(String whereClause, String[] whereArgs) {
         Cursor cursor = mDatabase.query(
                 CrimeTable.NAME,
