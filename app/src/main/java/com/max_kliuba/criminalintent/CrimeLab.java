@@ -7,13 +7,11 @@ import android.database.sqlite.SQLiteDatabase;
 
 import com.max_kliuba.criminalintent.database.CrimeBaseHelper;
 import com.max_kliuba.criminalintent.database.CrimeCursorWrapper;
-import com.max_kliuba.criminalintent.database.CrimeDbSchema;
 import com.max_kliuba.criminalintent.database.CrimeDbSchema.CrimeTable;
 
+import java.io.File;
 import java.util.ArrayList;
-import java.util.LinkedHashMap;
 import java.util.List;
-import java.util.Map;
 import java.util.UUID;
 
 public class CrimeLab {
@@ -86,6 +84,12 @@ public class CrimeLab {
 
             return cursor.getCrime();
         }
+    }
+
+    public File getPhotoFile(Crime crime) {
+        File filesDir = mContext.getFilesDir();
+
+        return new File(filesDir, crime.getPhotoFilename());
     }
 
     private CrimeCursorWrapper queryCrimes(String whereClause, String[] whereArgs) {

@@ -86,4 +86,8 @@ public class Crime {
     public void setCrimeType(int crimeType) {
         mCrimeType = crimeType;
     }
+
+    public String getPhotoFilename() {
+        return String.format("IMG_%s.jpg", getId());
+    }
 }
