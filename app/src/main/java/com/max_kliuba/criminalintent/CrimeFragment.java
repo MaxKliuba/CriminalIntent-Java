@@ -7,6 +7,7 @@ import android.content.pm.ResolveInfo;
 import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.net.Uri;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.provider.ContactsContract;
 import android.provider.MediaStore;
@@ -23,7 +24,6 @@ import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -342,14 +342,36 @@ public class CrimeFragment extends Fragment {
 
     private void setEnabledPhotoView(boolean enabled) {
         mPhotoView.setEnabled(enabled);
-        mPhotoView.setBackgroundResource(enabled ? R.color.purple_500 : R.color.grey);
+        if (enabled) {
+            mPhotoView.setBackgroundResource(R.color.purple_500);
+            mPhotoView.setImageDrawable(null);
+        } else {
+            mPhotoView.setBackgroundResource(R.color.grey);
+            mPhotoView.setImageResource(R.drawable.ic_photo_camera_24);
+        }
     }
 
     private void updatePhotoView() {
         if (mPhotoFile == null || !mPhotoFile.exists()) {
             mPhotoView.setImageResource(R.drawable.ic_photo_camera_24);
         } else {
-            Bitmap bitmap = PictureUtils.getScaledBitmap(mPhotoFile.getPath(), mPhotoView);
+            CrimePhotoAsyncTask crimePhotoAsyncTask = new CrimePhotoAsyncTask();
+            crimePhotoAsyncTask.execute(mPhotoFile.getPath(),
+                    String.valueOf(mPhotoView.getWidth()),
+                    String.valueOf(mPhotoView.getHeight()));
+        }
+    }
+
+    private class CrimePhotoAsyncTask extends AsyncTask<String, Void, Bitmap> {
+        @Override
+        protected Bitmap doInBackground(String... strings) {
+            return PictureUtils.getScaledBitmap(strings[0],
+                    Integer.parseInt(strings[1]), Integer.parseInt(strings[2]));
+        }
+
+        @Override
+        protected void onPostExecute(Bitmap bitmap) {
+            super.onPostExecute(bitmap);
             mPhotoView.setImageBitmap(bitmap);
         }
     }
