@@ -48,12 +48,12 @@ public class CrimeLab {
     }
 
     public void deleteCrime(Crime crime) {
-        String uuidString = crime.getId().toString();
+        deletePhotoFile(crime);
 
+        String uuidString = crime.getId().toString();
         mDatabase.delete(CrimeTable.NAME,
                 CrimeTable.Cols.UUID + " = ?",
                 new String[]{uuidString});
-
     }
 
     public List<Crime> getCrimes() {
