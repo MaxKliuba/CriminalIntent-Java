@@ -26,13 +26,13 @@
     <string name="crime_suspect_text">Обрати підозрюваного</string>
     <string name="crime_report_text">Надіслати звіт</string>
     <string name="send_report">Надіслати звіт через</string>
-    <string name="crime_report_subject">Злочинний намір - Звіт</string>
+    <string name="crime_report_subject">Злочинний Намір - Звіт</string>
     <string name="crime_report">%1$s!
         Злочин було виявлено о %2$s. %3$s, і %4$s
     </string>
     <string name="crime_report_solved">Справу розкрито</string>
     <string name="crime_report_unsolved">Справу не розкрито</string>
     <string name="crime_report_no_suspect">підозрюваних немає.</string>
-    <string name="crime_report_suspect">підозрюваним є %s.</string>
+    <string name="crime_report_suspect">підозрюваний є %s.</string>
     <string name="suspect_deleted_message">Підозрюваних немає</string>
 </resources>
