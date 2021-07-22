@@ -351,11 +351,11 @@ public class CrimeFragment extends Fragment {
     }
 
     private void updateTime() {
-        mTimeButton.setText(mCrime.getFormattedTime());
+        mTimeButton.setText(mCrime.getFormattedTime(getActivity()));
     }
 
     private void updateDate() {
-        mDateButton.setText(mCrime.getFormattedDate());
+        mDateButton.setText(mCrime.getFormattedDate(getActivity()));
     }
 
     private void updateCrime() {
@@ -366,7 +366,7 @@ public class CrimeFragment extends Fragment {
     private String getCrimeReport() {
         String solvedString = mCrime.isSolved() ? getString(R.string.crime_report_solved)
                 : getString(R.string.crime_report_unsolved);
-        String dateString = mCrime.getFormattedDateTime();
+        String dateString = mCrime.getFormattedDateTime(getActivity());
         String suspect = mCrime.getSuspect();
         suspect = (suspect == null) ? getString(R.string.crime_report_no_suspect)
                 : getString(R.string.crime_report_suspect, suspect);

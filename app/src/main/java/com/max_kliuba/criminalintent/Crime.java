@@ -1,5 +1,8 @@
 package com.max_kliuba.criminalintent;
 
+import android.content.Context;
+import android.text.format.DateFormat;
+
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Locale;
@@ -41,21 +44,23 @@ public class Crime {
         return mDate;
     }
 
-    public String getFormattedTime() {
+    public String getFormattedTime(Context context) {
+        String pattern = DateFormat.is24HourFormat(context) ? "HH:mm" : "hh:mm a";
         SimpleDateFormat simpleDateFormat =
-                new SimpleDateFormat("HH:mm", Locale.US);
+                new SimpleDateFormat(pattern, Locale.getDefault());
         return simpleDateFormat.format(mDate);
     }
 
-    public String getFormattedDate() {
+    public String getFormattedDate(Context context) {
         SimpleDateFormat simpleDateFormat =
-                new SimpleDateFormat("EEEE, MMM dd, yyyy", Locale.US);
+                new SimpleDateFormat("EEEE, MMM dd, yyyy", Locale.getDefault());
         return simpleDateFormat.format(mDate);
     }
 
-    public String getFormattedDateTime() {
+    public String getFormattedDateTime(Context context) {
+        String pattern = DateFormat.is24HourFormat(context) ? "HH:mm" : "hh:mm a";
         SimpleDateFormat simpleDateFormat =
-                new SimpleDateFormat("HH:mm, EEEE, MMM dd, yyyy", Locale.US);
+                new SimpleDateFormat(String.format("%s, EEEE, MMM dd, yyyy", pattern), Locale.getDefault());
         return simpleDateFormat.format(mDate);
     }
 

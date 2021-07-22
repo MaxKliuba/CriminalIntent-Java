@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Злочинний Намір</string>
+    <string name="show_subtitle">Показати підзаголовок</string>
+    <string name="hide_subtitle">Сховати підзаголовок</string>
+    <plurals name="subtitle_plural">
+        <item quantity="zero">%1$d злочинів</item>
+        <item quantity="one">%1$d злочин</item>
+        <item quantity="few">%1$d злочини</item>
+        <item quantity="many">%1$d злочинів</item>
+    </plurals>
+    <string name="new_crime">Новий злочин</string>
+    <string name="empty_list_message">Список порожній</string>
+    <string name="delete_crime">Видалити злочин</string>
+    <string name="crime_deleted_message">Злочин видалено</string>
+    <string name="crime_title_label">Заголовок</string>
+    <string name="crime_title_hint">Введіть заголовок для злочину</string>
+    <string name="new_photo_text">Нове фото</string>
+    <string name="delete_photo_text">Видалити фото</string>
+    <string name="photo_deleted_message">Фото видалено</string>
+    <string name="crime_details_label">Деталі</string>
+    <string name="crime_solved_label">Справу розкрито</string>
+    <string name="time_picker_title">Час виявлення злочину:</string>
+    <string name="date_picker_title">Дата виявлення злочину:</string>
+    <string name="crime_suspect_label">Підозрюваний</string>
+    <string name="crime_suspect_text">Обрати підозрюваного</string>
+    <string name="crime_report_text">Надіслати звіт</string>
+    <string name="send_report">Надіслати звіт через</string>
+    <string name="crime_report_subject">Злочинний намір - Звіт</string>
+    <string name="crime_report">%1$s!
+        Злочин було виявлено о %2$s. %3$s, і %4$s
+    </string>
+    <string name="crime_report_solved">Справу розкрито</string>
+    <string name="crime_report_unsolved">Справу не розкрито</string>
+    <string name="crime_report_no_suspect">підозрюваних немає.</string>
+    <string name="crime_report_suspect">підозрюваним є %s.</string>
+    <string name="suspect_deleted_message">Підозрюваних немає</string>
+</resources>
