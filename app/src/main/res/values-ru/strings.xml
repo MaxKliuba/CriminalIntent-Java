@@ -19,6 +19,9 @@
     <string name="delete_photo_text">Удалить фото</string>
     <string name="photo_deleted_message">Фото удалено</string>
     <string name="crime_details_label">Детали</string>
+    <string name="crime_time_label">Время</string>
+    <string name="crime_date_label">Дата</string>
+    <string name="crime_state_label">Состояние</string>
     <string name="crime_solved_label">Дело раскрыто</string>
     <string name="time_picker_title">Время обнаружения преступления:</string>
     <string name="date_picker_title">Дата обнаружения преступления:</string>
@@ -35,4 +38,8 @@
     <string name="crime_report_no_suspect">подозреваемых нет.</string>
     <string name="crime_report_suspect">подозреваемый есть %s.</string>
     <string name="suspect_deleted_message">Подозреваемых нет</string>
+    <string name="crime_photo_no_image_description">Сделать фото места преступления (фото не установлено)</string>
+    <string name="crime_photo_image_description">Фото места преступления (фото установлено)</string>
+    <string name="go_to_start_button_description">Перейти на первую страницу</string>
+    <string name="go_to_end_button_description">Перейти на последнюю страницу</string>
 </resources>

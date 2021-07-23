@@ -16,6 +16,9 @@
     <string name="delete_photo_text">Delete Photo</string>
     <string name="photo_deleted_message">Photo deleted</string>
     <string name="crime_details_label">Details</string>
+    <string name="crime_time_label">Time</string>
+    <string name="crime_date_label">Date</string>
+    <string name="crime_state_label">State</string>
     <string name="crime_solved_label">Solved</string>
     <string name="time_picker_title">Time of crime:</string>
     <string name="date_picker_title">Date of crime:</string>
@@ -32,4 +35,8 @@
     <string name="crime_report_no_suspect">there is no suspect.</string>
     <string name="crime_report_suspect">the suspect is %s.</string>
     <string name="suspect_deleted_message">There is no suspect</string>
+    <string name="crime_photo_no_image_description">Take photo of crime scene (photo not set)</string>
+    <string name="crime_photo_image_description">Crime scene photo (set)</string>
+    <string name="go_to_start_button_description">Go to the first page</string>
+    <string name="go_to_end_button_description">Go to the last page</string>
 </resources>

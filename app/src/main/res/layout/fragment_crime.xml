@@ -1,138 +1,154 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:padding="16dp">
 
-    <ScrollView
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:focusable="false"
+        android:focusableInTouchMode="true">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
+            android:orientation="horizontal"
             android:focusable="false"
             android:focusableInTouchMode="true">
 
+            <androidx.cardview.widget.CardView
+                android:layout_width="93dp"
+                android:layout_height="93dp"
+                android:layout_marginEnd="16dp"
+                app:cardElevation="0dp"
+                app:cardCornerRadius="10dp">
+
+                <ImageView
+                    android:id="@+id/crime_photo"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@color/purple_500"
+                    android:cropToPadding="true"
+                    android:scaleType="centerCrop"
+                    app:srcCompat="@drawable/ic_photo_camera_24"
+                    tools:ignore="VectorDrawableCompat"
+                    android:focusable="true"
+                    android:contentDescription="@string/crime_photo_no_image_description" />
+
+            </androidx.cardview.widget.CardView>
+
             <LinearLayout
+                android:id="@+id/input_linear_layout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal"
+                android:orientation="vertical"
                 android:focusable="false"
                 android:focusableInTouchMode="true">
 
-                <androidx.cardview.widget.CardView
-                    android:layout_width="93dp"
-                    android:layout_height="93dp"
-                    android:layout_marginEnd="16dp"
-                    app:cardElevation="0dp"
-                    app:cardCornerRadius="10dp">
-
-                    <ImageView
-                        android:id="@+id/crime_photo"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:background="@color/purple_500"
-                        android:cropToPadding="true"
-                        android:scaleType="centerCrop"
-                        app:srcCompat="@drawable/ic_photo_camera_24"
-                        tools:ignore="VectorDrawableCompat" />
-
-                </androidx.cardview.widget.CardView>
-
-                <LinearLayout
-                    android:id="@+id/input_linear_layout"
+                <TextView
+                    style="?android:listSeparatorTextViewStyle"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="vertical"
-                    android:focusable="false"
-                    android:focusableInTouchMode="true">
+                    android:text="@string/crime_title_label" />
 
-                    <TextView
-                        style="?android:listSeparatorTextViewStyle"
+                <com.google.android.material.textfield.TextInputLayout
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/crime_title_hint">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/crime_title"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="@string/crime_title_label" />
-
-                    <com.google.android.material.textfield.TextInputLayout
-                        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:hint="@string/crime_title_hint">
-
-                        <com.google.android.material.textfield.TextInputEditText
-                            android:id="@+id/crime_title"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:inputType="textMultiLine|textCapSentences" />
-                    </com.google.android.material.textfield.TextInputLayout>
-
-                </LinearLayout>
+                        android:inputType="textMultiLine|textCapSentences" />
+                </com.google.android.material.textfield.TextInputLayout>
 
             </LinearLayout>
 
-            <TextView
-                style="?android:listSeparatorTextViewStyle"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="@string/crime_details_label" />
-
-            <Button
-                style="?attr/materialButtonOutlinedStyle"
-                android:id="@+id/crime_time"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                app:icon="@drawable/ic_time_24"
-                app:iconPadding="8dp"
-                app:iconGravity="end"
-                tools:text="[TIME]" />
-
-            <Button
-                style="?attr/materialButtonOutlinedStyle"
-                android:id="@+id/crime_date"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                app:icon="@drawable/ic_date_24"
-                app:iconPadding="8dp"
-                app:iconGravity="end"
-                tools:text="[DATE]" />
-
-            <CheckBox
-                android:id="@+id/crime_solved"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="@string/crime_solved_label"/>
-
-            <TextView
-                style="?android:listSeparatorTextViewStyle"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="@string/crime_suspect_label" />
-
-            <Button
-                style="?attr/materialButtonOutlinedStyle"
-                android:id="@+id/crime_suspect"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="@string/crime_suspect_text"
-                app:icon="@drawable/ic_person_add_24"
-                app:iconGravity="end" />
-
-            <Button
-                android:id="@+id/crime_report"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
-                android:text="@string/crime_report_text"
-                app:icon="@drawable/ic_send_24"
-                app:iconPadding="8dp"
-                app:iconGravity="end" />
-
         </LinearLayout>
 
-    </ScrollView>
+        <TextView
+            style="?android:listSeparatorTextViewStyle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:text="@string/crime_time_label"
+            android:labelFor="@+id/crime_time" />
 
-</FrameLayout>
+        <Button
+            style="?attr/materialButtonOutlinedStyle"
+            android:id="@+id/crime_time"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:icon="@drawable/ic_time_24"
+            app:iconPadding="8dp"
+            app:iconGravity="end"
+            tools:text="[TIME]" />
+
+        <TextView
+            style="?android:listSeparatorTextViewStyle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:text="@string/crime_date_label"
+            android:labelFor="@+id/crime_date" />
+
+        <Button
+            style="?attr/materialButtonOutlinedStyle"
+            android:id="@+id/crime_date"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:icon="@drawable/ic_date_24"
+            app:iconPadding="8dp"
+            app:iconGravity="end"
+            tools:text="[DATE]" />
+
+        <TextView
+            style="?android:listSeparatorTextViewStyle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:text="@string/crime_state_label"
+            android:labelFor="@+id/crime_solved"/>
+
+        <CheckBox
+            android:id="@+id/crime_solved"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/crime_solved_label"/>
+
+        <TextView
+            style="?android:listSeparatorTextViewStyle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:text="@string/crime_suspect_label"
+            android:labelFor="@+id/crime_suspect"/>
+
+        <Button
+            style="?attr/materialButtonOutlinedStyle"
+            android:id="@+id/crime_suspect"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/crime_suspect_text"
+            app:icon="@drawable/ic_person_add_24"
+            app:iconGravity="end" />
+
+        <Button
+            android:id="@+id/crime_report"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="24dp"
+            android:text="@string/crime_report_text"
+            app:icon="@drawable/ic_send_24"
+            app:iconPadding="8dp"
+            app:iconGravity="end" />
+
+    </LinearLayout>
+
+</ScrollView>

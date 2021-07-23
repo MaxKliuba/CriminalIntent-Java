@@ -388,11 +388,13 @@ public class CrimeFragment extends Fragment {
     private void updatePhotoView() {
         if (mPhotoFile == null || !mPhotoFile.exists()) {
             mPhotoView.setImageResource(R.drawable.ic_photo_camera_24);
+            mPhotoView.setContentDescription(getString(R.string.crime_photo_no_image_description));
         } else {
             CrimePhotoAsyncTask crimePhotoAsyncTask = new CrimePhotoAsyncTask();
             crimePhotoAsyncTask.execute(mPhotoFile.getPath(),
                     String.valueOf(mPhotoView.getWidth()),
                     String.valueOf(mPhotoView.getHeight()));
+            mPhotoView.setContentDescription(getString(R.string.crime_photo_image_description));
         }
     }
 

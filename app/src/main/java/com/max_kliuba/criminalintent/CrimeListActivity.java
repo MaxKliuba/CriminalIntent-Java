@@ -2,7 +2,6 @@ package com.max_kliuba.criminalintent;
 
 import android.content.Intent;
 
-import androidx.annotation.LayoutRes;
 import androidx.fragment.app.Fragment;
 
 public class CrimeListActivity extends SingleFragmentActivity
@@ -10,7 +9,7 @@ public class CrimeListActivity extends SingleFragmentActivity
 
     private Fragment mDetailFragment;
 
-    @LayoutRes
+    @Override
     protected int getLayoutResId() {
         return R.layout.activity_masterdetail;
     }
