@@ -1,4 +1,4 @@
-package com.max_kliuba.criminalintent;
+package com.maxclub.android.criminalintent;
 
 import android.app.Activity;
 import android.app.Dialog;
@@ -22,7 +22,7 @@ import java.util.GregorianCalendar;
 
 public class DatePickerFragment extends DialogFragment {
 
-    public static final String EXTRA_DATE = "com.max_kliuba.criminalintent.date";
+    public static final String EXTRA_DATE = "com.maxclub.android.criminalintent.date";
 
     private static final String ARG_DATE = "date";
 

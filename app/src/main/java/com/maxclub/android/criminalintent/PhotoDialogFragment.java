@@ -1,4 +1,4 @@
-package com.max_kliuba.criminalintent;
+package com.maxclub.android.criminalintent;
 
 import android.app.Activity;
 import android.app.Dialog;
@@ -29,7 +29,7 @@ import java.util.List;
 public class PhotoDialogFragment extends DialogFragment {
 
     private static final String ARG_PHOTO_PATH = "photo_path";
-    private static final String PROVIDER_AUTHORITY = "com.max_kliuba.criminalintent.fileprovider";
+    private static final String PROVIDER_AUTHORITY = "com.maxclub.android.criminalintent.fileprovider";
     private static final int REQUEST_PHOTO = 0;
 
     private String mPhotoPath;

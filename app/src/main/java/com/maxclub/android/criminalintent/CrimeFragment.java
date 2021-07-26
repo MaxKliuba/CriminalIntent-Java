@@ -1,4 +1,4 @@
-package com.max_kliuba.criminalintent;
+package com.maxclub.android.criminalintent;
 
 import android.app.Activity;
 import android.content.Context;
@@ -48,7 +48,7 @@ public class CrimeFragment extends Fragment {
     private static final String DIALOG_DATE = "DialogDate";
     private static final String DIALOG_TIME = "DialogTime";
     private static final String DIALOG_PHOTO = "DialogPhoto";
-    private static final String PROVIDER_AUTHORITY = "com.max_kliuba.criminalintent.fileprovider";
+    private static final String PROVIDER_AUTHORITY = "com.maxclub.android.criminalintent.fileprovider";
     private static final int REQUEST_DATE = 0;
     private static final int REQUEST_TIME = 1;
     private static final int REQUEST_CONTACT = 2;

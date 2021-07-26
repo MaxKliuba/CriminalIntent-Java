@@ -1,4 +1,4 @@
-package com.max_kliuba.criminalintent.database;
+package com.maxclub.android.criminalintent.database;
 
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
@@ -6,7 +6,7 @@ import android.database.sqlite.SQLiteOpenHelper;
 
 import androidx.annotation.Nullable;
 
-import com.max_kliuba.criminalintent.database.CrimeDbSchema.CrimeTable;
+import com.maxclub.android.criminalintent.database.CrimeDbSchema.CrimeTable;
 
 public class CrimeBaseHelper extends SQLiteOpenHelper {
     private static final int VERSION = 1;

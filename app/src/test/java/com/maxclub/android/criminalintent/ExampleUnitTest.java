@@ -1,4 +1,4 @@
-package com.max_kliuba.criminalintent;
+package com.maxclub.android.criminalintent;
 
 import org.junit.Test;
 

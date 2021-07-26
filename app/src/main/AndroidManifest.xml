@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.max_kliuba.criminalintent">
+    package="com.maxclub.android.criminalintent">
 
     <uses-feature android:name="android.hardware.camera"
         android:required="false"
@@ -36,7 +36,7 @@
             android:parentActivityName=".CrimeListActivity">
         </activity>
         <provider
-            android:authorities="com.max_kliuba.criminalintent.fileprovider"
+            android:authorities="com.maxclub.android.criminalintent.fileprovider"
             android:name="androidx.core.content.FileProvider"
             android:exported="false"
             android:grantUriPermissions="true">

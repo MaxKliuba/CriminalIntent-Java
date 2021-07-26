@@ -1,4 +1,4 @@
-package com.max_kliuba.criminalintent;
+package com.maxclub.android.criminalintent;
 
 import android.content.Context;
 import android.content.Intent;
@@ -23,7 +23,7 @@ import java.util.UUID;
 public class CrimePagerActivity extends AppCompatActivity
         implements CrimeFragment.Callbacks {
 
-    private static final String EXTRA_CRIME_ID = "com.max_kliuba.criminalintent.crime_id";
+    private static final String EXTRA_CRIME_ID = "com.maxclub.android.criminalintent.crime_id";
 
     private List<Crime> mCrimes;
     private ViewPager mViewPager;

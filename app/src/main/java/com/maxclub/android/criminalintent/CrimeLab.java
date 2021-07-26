@@ -1,13 +1,13 @@
-package com.max_kliuba.criminalintent;
+package com.maxclub.android.criminalintent;
 
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 
-import com.max_kliuba.criminalintent.database.CrimeBaseHelper;
-import com.max_kliuba.criminalintent.database.CrimeCursorWrapper;
-import com.max_kliuba.criminalintent.database.CrimeDbSchema.CrimeTable;
+import com.maxclub.android.criminalintent.database.CrimeBaseHelper;
+import com.maxclub.android.criminalintent.database.CrimeCursorWrapper;
+import com.maxclub.android.criminalintent.database.CrimeDbSchema.CrimeTable;
 
 import java.io.File;
 import java.util.ArrayList;

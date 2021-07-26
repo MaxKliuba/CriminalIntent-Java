@@ -1,14 +1,14 @@
-package com.max_kliuba.criminalintent.database;
+package com.maxclub.android.criminalintent.database;
 
 import android.database.Cursor;
 import android.database.CursorWrapper;
 
-import com.max_kliuba.criminalintent.Crime;
+import com.maxclub.android.criminalintent.Crime;
 
 import java.util.Date;
 import java.util.UUID;
 
-import static com.max_kliuba.criminalintent.database.CrimeDbSchema.*;
+import static com.maxclub.android.criminalintent.database.CrimeDbSchema.*;
 
 public class CrimeCursorWrapper extends CursorWrapper {
     /**

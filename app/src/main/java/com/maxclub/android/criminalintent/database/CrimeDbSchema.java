@@ -1,4 +1,4 @@
-package com.max_kliuba.criminalintent.database;
+package com.maxclub.android.criminalintent.database;
 
 public class CrimeDbSchema {
     public static final class CrimeTable {

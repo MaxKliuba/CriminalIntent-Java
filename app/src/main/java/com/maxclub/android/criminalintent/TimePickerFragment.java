@@ -1,4 +1,4 @@
-package com.max_kliuba.criminalintent;
+package com.maxclub.android.criminalintent;
 
 import android.app.Activity;
 import android.app.AlertDialog;
@@ -23,7 +23,7 @@ import java.util.GregorianCalendar;
 
 public class TimePickerFragment extends DialogFragment {
 
-    public static final String EXTRA_TIME = "com.max_kliuba.criminalintent.time";
+    public static final String EXTRA_TIME = "com.maxclub.android.criminalintent.time";
 
     private static final String ARG_TIME = "date";
 
