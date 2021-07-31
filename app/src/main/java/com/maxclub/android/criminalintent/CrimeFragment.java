@@ -6,9 +6,7 @@ import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
 import android.database.Cursor;
-import android.graphics.Bitmap;
 import android.net.Uri;
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.provider.ContactsContract;
 import android.provider.MediaStore;
@@ -34,6 +32,7 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 
 import com.google.android.material.textfield.TextInputEditText;
+import com.squareup.picasso.Picasso;
 
 import org.jetbrains.annotations.NotNull;
 
@@ -250,7 +249,6 @@ public class CrimeFragment extends Fragment {
                     PhotoDialogFragment dialog = PhotoDialogFragment.newInstance(mPhotoFile.getPath());
                     dialog.show(manager, DIALOG_PHOTO);
                 }
-
             }
         });
         mPhotoView.setOnLongClickListener(new View.OnLongClickListener() {
@@ -267,8 +265,7 @@ public class CrimeFragment extends Fragment {
             }
         });
 
-        ViewTreeObserver observer = mPhotoView.getViewTreeObserver();
-        observer.addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
+        mPhotoView.getViewTreeObserver().addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
             @Override
             public void onGlobalLayout() {
                 updatePhotoView();
@@ -377,38 +374,26 @@ public class CrimeFragment extends Fragment {
     private void setEnabledPhotoView(boolean enabled) {
         mPhotoView.setEnabled(enabled);
         if (enabled) {
-            mPhotoView.setBackgroundResource(R.color.purple_500);
-            mPhotoView.setImageDrawable(null);
+            mPhotoView.setImageResource(R.drawable.placeholder_enabled);
         } else {
-            mPhotoView.setBackgroundResource(R.color.grey);
-            mPhotoView.setImageResource(R.drawable.ic_photo_camera_24);
+            mPhotoView.setImageResource(R.drawable.placeholder_disabled);
         }
     }
 
     private void updatePhotoView() {
-        if (mPhotoFile == null || !mPhotoFile.exists()) {
-            mPhotoView.setImageResource(R.drawable.ic_photo_camera_24);
-            mPhotoView.setContentDescription(getString(R.string.crime_photo_no_image_description));
-        } else {
-            CrimePhotoAsyncTask crimePhotoAsyncTask = new CrimePhotoAsyncTask();
-            crimePhotoAsyncTask.execute(mPhotoFile.getPath(),
-                    String.valueOf(mPhotoView.getWidth()),
-                    String.valueOf(mPhotoView.getHeight()));
-            mPhotoView.setContentDescription(getString(R.string.crime_photo_image_description));
-        }
-    }
-
-    private class CrimePhotoAsyncTask extends AsyncTask<String, Void, Bitmap> {
-        @Override
-        protected Bitmap doInBackground(String... strings) {
-            return PictureUtils.getScaledBitmap(strings[0],
-                    Integer.parseInt(strings[1]), Integer.parseInt(strings[2]));
-        }
-
-        @Override
-        protected void onPostExecute(Bitmap bitmap) {
-            super.onPostExecute(bitmap);
-            mPhotoView.setImageBitmap(bitmap);
+        if (isAdded()) {
+            if (mPhotoFile == null || !mPhotoFile.exists()) {
+                mPhotoView.setImageResource(R.drawable.placeholder_enabled);
+                mPhotoView.setContentDescription(getString(R.string.crime_photo_no_image_description));
+            } else {
+                Picasso.get()
+                        .load(mPhotoFile)
+                        .fit()
+                        .centerCrop()
+                        .placeholder(R.drawable.placeholder)
+                        .into(mPhotoView);
+                mPhotoView.setContentDescription(getString(R.string.crime_photo_image_description));
+            }
         }
     }
 }

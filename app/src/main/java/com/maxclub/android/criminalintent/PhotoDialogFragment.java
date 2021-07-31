@@ -5,7 +5,6 @@ import android.app.Dialog;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
-import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
@@ -21,6 +20,8 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.core.content.FileProvider;
 import androidx.fragment.app.DialogFragment;
 
+import com.squareup.picasso.Picasso;
+
 import org.jetbrains.annotations.NotNull;
 
 import java.io.File;
@@ -32,7 +33,6 @@ public class PhotoDialogFragment extends DialogFragment {
     private static final String PROVIDER_AUTHORITY = "com.maxclub.android.criminalintent.fileprovider";
     private static final int REQUEST_PHOTO = 0;
 
-    private String mPhotoPath;
     private File mPhotoFile;
     private ImageView mPhotoView;
     private Button mPhotoButton;
@@ -51,8 +51,8 @@ public class PhotoDialogFragment extends DialogFragment {
     @NotNull
     @Override
     public Dialog onCreateDialog(@Nullable @org.jetbrains.annotations.Nullable Bundle savedInstanceState) {
-        mPhotoPath = (String) getArguments().get(ARG_PHOTO_PATH);
-        mPhotoFile = new File(mPhotoPath);
+        String photoPath = (String) getArguments().get(ARG_PHOTO_PATH);
+        mPhotoFile = new File(photoPath);
 
         View v = LayoutInflater.from(getActivity()).inflate(R.layout.dialog_photo, null);
 
@@ -103,6 +103,7 @@ public class PhotoDialogFragment extends DialogFragment {
         }
 
         if (requestCode == REQUEST_PHOTO) {
+            Picasso.get().invalidate(mPhotoFile);
             Uri uri = FileProvider.getUriForFile(getActivity(), PROVIDER_AUTHORITY, mPhotoFile);
             getActivity().revokeUriPermission(uri, Intent.FLAG_GRANT_WRITE_URI_PERMISSION);
             updatePhotoView();
@@ -110,7 +111,11 @@ public class PhotoDialogFragment extends DialogFragment {
     }
 
     private void updatePhotoView() {
-        Bitmap bitmap = PictureUtils.getScaledBitmap(mPhotoPath, mPhotoView);
-        mPhotoView.setImageBitmap(bitmap);
+        Picasso.get()
+                .load(mPhotoFile)
+                .fit()
+                .centerCrop()
+                .placeholder(R.drawable.placeholder)
+                .into(mPhotoView);
     }
 }
